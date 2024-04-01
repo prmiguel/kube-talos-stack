@@ -4,8 +4,7 @@ services:
     image: ghcr.io/siderolabs/talosctl:latest
     container_name: talosctl
     privileged: true
-    networks:
-      - host
+    network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - /usr/bin/docker:/usr/bin/docker
