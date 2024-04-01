@@ -13,3 +13,6 @@ docker run -it --privileged \
 ghcr.io/siderolabs/talosctl:latest \
 cluster create --wait
 ```
+
+## Referenes
+- [talos](https://github.com/siderolabs/talos)
