@@ -1,0 +1,18 @@
+---
+services:
+  talosctl:
+    image: ghcr.io/siderolabs/talosctl:latest
+    container_name: talosctl
+    privileged: true
+    networks:
+      - host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /usr/bin/docker:/usr/bin/docker
+      - talos:/.talos
+      - kube:/.kube
+    command: cluster create --wait
+
+volumes:
+  talos:
+  kube:
