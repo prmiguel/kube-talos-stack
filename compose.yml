@@ -15,7 +15,6 @@ services:
     image: terminal
     build: .
     container_name: terminal
-    network_mode: host
     ports:
       - "7681:7681"
     volumes:
