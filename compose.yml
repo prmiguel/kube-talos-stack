@@ -11,7 +11,15 @@ services:
       - talos:/.talos
       - kube:/.kube
     command: cluster create --wait
-
+  terminal:
+    image: terminal
+    build: .
+    container_name: terminal
+    network_mode: host
+    ports:
+      - "7681:7681"
+    volumes:
+      - kube:/root/.kube
 volumes:
   talos:
   kube:
