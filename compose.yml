@@ -17,8 +17,20 @@ services:
     container_name: terminal
     ports:
       - "7681:7681"
+      - "8900-8910:8900-8910"
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
       - kube:/root/.kube
+  command:
+    image: alpine
+    container_name: command
+    depends_on:
+      - talosctl
+      - terminal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+    command: /bin/sh -c "sleep 60 && apk add --update docker openrc && rc-update add docker boot && docker network connect talos-default terminal"
+     
 volumes:
   talos:
   kube:
