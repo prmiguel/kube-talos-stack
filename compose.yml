@@ -21,6 +21,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - kube:/root/.kube
+  lens:
+    image: supervisorcom/lens-web
+    container_name: lens
+    ports:
+      - "8080:8080"
+    volumes:
+      - kube:/root/.kube
   command:
     image: alpine
     container_name: command
