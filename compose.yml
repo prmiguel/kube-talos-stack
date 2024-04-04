@@ -36,7 +36,7 @@ services:
       - terminal
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
-    command: /bin/sh -c "sleep 60 && apk add --update docker openrc && rc-update add docker boot && docker network connect talos-default terminal"
+    command: /bin/sh -c "sleep 60 && apk add --update docker openrc && rc-update add docker boot && docker network connect talos-default terminal && docker network connect talos-default lens"
      
 volumes:
   talos:
