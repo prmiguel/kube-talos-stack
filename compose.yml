@@ -11,15 +11,28 @@ services:
       - talos:/.talos
       - kube:/.kube
     command: cluster create --wait
-  terminal:
-    image: terminal
+  # terminal:
+  #   image: terminal
+  #   build: .
+  #   container_name: terminal
+  #   ports:
+  #     - "7681:7681"
+  #     - "8900-8910:8900-8910"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:rw
+  #     - kube:/root/.kube
+  # kubebox:
+  #   image: docker.io/astefanutti/kubebox:latest
+  #   container_name: kubebox
+  #   volumes:
+  #     - kube:/home/node/.kube
+  cloudcmd:
+    image: cloudcmd
+    container_name: cloudcmd
     build: .
-    container_name: terminal
     ports:
-      - "7681:7681"
-      - "8900-8910:8900-8910"
+      - "8000:8000"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:rw
       - kube:/root/.kube
   lens:
     image: supervisorcom/lens-web
@@ -33,10 +46,10 @@ services:
     container_name: command
     depends_on:
       - talosctl
-      - terminal
+      - cloudcmd
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw
-    command: /bin/sh -c "sleep 60 && apk add --update docker openrc && rc-update add docker boot && docker network connect talos-default terminal && docker network connect talos-default lens"
+    command: /bin/sh -c "sleep 60 && apk add --update docker openrc && rc-update add docker boot && docker network connect talos-default terminal && docker network connect talos-default lens && docker network connect talos-default cloudcmd"
      
 volumes:
   talos:
