@@ -32,6 +32,7 @@ services:
     build: .
     ports:
       - "8000:8000"
+      - "8900-8910:8900-8910"
     volumes:
       - kube:/root/.kube
       - code:/code:ro
