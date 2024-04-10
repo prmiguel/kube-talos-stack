@@ -11,21 +11,6 @@ services:
       - talos:/.talos
       - kube:/.kube
     command: cluster create --wait
-  # terminal:
-  #   image: terminal
-  #   build: .
-  #   container_name: terminal
-  #   ports:
-  #     - "7681:7681"
-  #     - "8900-8910:8900-8910"
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:rw
-  #     - kube:/root/.kube
-  # kubebox:
-  #   image: docker.io/astefanutti/kubebox:latest
-  #   container_name: kubebox
-  #   volumes:
-  #     - kube:/home/node/.kube
   cloudcmd:
     image: ghcr.io/prmiguel/kube-cloudcmd:main
     container_name: cloudcmd
@@ -74,7 +59,6 @@ services:
       docker network connect talos-default lens && \
       docker network connect talos-default openvscode-server && \
       docker network connect talos-default cloudcmd"
-      # docker network connect talos-default terminal && \
     
 volumes:
   talos:
